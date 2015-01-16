@@ -34,6 +34,36 @@ pub fn factors(n: u64) -> Vec<u64> {
     result 
 }
 
+struct PrimeIterator {
+    last: u64
+}
+
+impl  Iterator for PrimeIterator {
+    type Item = u64;
+
+    fn next(&mut self) -> Option<u64> {
+        if self.last == 0 {
+            self.last = 2;
+            return Some(2);
+        }
+        if self.last == 2 {
+            self.last = 3;
+            return Some(3);
+        }
+        let mut p = self.last + 2;
+        loop {
+            if is_prime(p) {
+                self.last = p;
+                return Some(p);
+            }
+            p += 2;
+        }
+    }    
+}
+
+pub fn primes_iterator () -> PrimeIterator {
+    PrimeIterator { last: 0 }
+}
 //-------------------------------------------------------------------------------
 // struct EratostheneSieve {
 //     last: u64,

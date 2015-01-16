@@ -5,6 +5,7 @@ use std::iter::AdditiveIterator;
 use utils::fibonacci::Fibonacci;
 use utils::palindromes::is_palindrome;
 use utils::primes;
+use std::num::Int;
 
 mod utils;
 
@@ -46,13 +47,30 @@ fn ex4() -> u64 {
         for j in 100..1000 { 
             if i*j > max && is_palindrome(i*j) {
                 max = i*j;
-                // if i*j > max { max = i*j }
             }
         }
     }
     max
 }
 
+fn ex5() -> u64 {
+    let mut scm = 1;
+    for i in 1..21 {
+        scm = i / utils::gcd(i, scm) * scm;
+    }
+    scm
+}
+
+#[allow(unstable)]
+fn ex6() -> u64 {
+    let square_of_sum = (100*101/2).pow(2);
+    let sum_of_squares = (1..101).map(|n| n*n).sum();
+    square_of_sum - sum_of_squares
+}
+
+fn ex7() -> u64 {
+    primes::primes_iterator().nth(10001 - 1).expect("")
+}
 //-------------------------------------------------------------------------------
 #[allow(unstable)]
 // fn ex10() -> u64 {
@@ -69,6 +87,9 @@ fn main() {
         ex2 as fn() -> u64, 
         ex3 as fn() -> u64, 
         ex4 as fn() -> u64, 
+        ex5 as fn() -> u64, 
+        ex6 as fn() -> u64, 
+        ex7 as fn() -> u64, 
     );
 
 
