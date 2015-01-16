@@ -1,4 +1,10 @@
+#[allow(dead_code)]
+
 use std::iter::AdditiveIterator;
+
+use utils::fibonacci::Fibonacci;
+use utils::palindromes::is_palindrome;
+use utils::primes;
 
 mod utils;
 
@@ -12,54 +18,64 @@ fn ex1() -> u64 {
 //-------------------------------------------------------------------------------
 #[allow(unstable)]
 fn ex2() -> u64 {
-    utils::fibonacci::iterator()
+    Fibonacci::new()
         .filter(|f| *f % 2 == 0)
-        .take_while(|n| *n <= 4000000)
+        .take_while(|n| *n <= 4_000_000)
         .sum()
 }
 
 //-------------------------------------------------------------------------------
 fn ex3() -> u64 {
-    //600_851_475_143
-    utils::primes::factors_iterator(210)
+    // Why do i have to use * below?
+    *primes::factors(600_851_475_143)
+        .iter()
         .max()
-        .expect("n should have at least one divisor")
+        .expect("n should have at least one divisor")  // is it idiomatic? seems awkward
 }
 
+// fn ex4() -> u64 {
+//     let mut products = vec![];
+//     for i in 100..1000 {
+//         for j in 100..1000 { products.push( i * j) }
+//     }
+//     *products.iter().filter(|n| is_palindrome(**n)).max().expect("") // why **?
+// }
+fn ex4() -> u64 {
+    let mut max = 0;
+    for i in 100..1000 {
+        for j in 100..1000 { 
+            if i*j > max && is_palindrome(i*j) {
+                max = i*j;
+                // if i*j > max { max = i*j }
+            }
+        }
+    }
+    max
+}
 
 //-------------------------------------------------------------------------------
 #[allow(unstable)]
-fn ex10() -> u64 {
-    utils::primes::eratosthene(2_000_000)
-        .sum() 
-}
+// fn ex10() -> u64 {
+//     primes::eratosthene(2_000_000)
+//         .sum() 
+// }
 
 //-------------------------------------------------------------------------------
 fn main() {
     println!("Euler Project Solver!");
     
-    let solvers = [
-        &ex1 as &Fn<(), u64>, 
-        &ex2 as &Fn<(), u64>, 
-        &ex3 as &Fn<(), u64>,
-        &ex10 as &Fn<(), u64>,
-    ];
+    let solvers = vec!(
+        ex1 as fn() -> u64, 
+        ex2 as fn() -> u64, 
+        ex3 as fn() -> u64, 
+        ex4 as fn() -> u64, 
+    );
+
 
     for (i, solver) in solvers.iter().enumerate() {
-        println!("Exercise {}: {}", i+1, (*solver)());
+        println!("Exercise {}: {}", i+1, (solver)());
     }
 
-    // for i in utils::primes::eratosthene_sieve(20) {
-    //     println!("{}", i);
-    // }
-    // println!("Done {:?}", [false; 10]);
-
-
-    println!("{:?}", utils::primes::primes_up_to(1000));
-
-    for i in utils:: primes::factors_iterator(20) {
-        println!("{}",i);
-    }
 }
 
 

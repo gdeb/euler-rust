@@ -2,7 +2,7 @@
 // Fibonacci module
 // Allow creaton of an iterator to iterate through fibonacci numbers
 //-------------------------------------------------------------------------------
-struct Fibonacci {
+pub struct Fibonacci {
     current: u64,
     next: u64,
 }
@@ -17,8 +17,8 @@ impl Iterator for Fibonacci {
     }
 }
 
-pub fn iterator () -> Fibonacci {
-    Fibonacci { current: 1, next: 1}
+impl Fibonacci {
+    pub fn new() -> Fibonacci {
+        Fibonacci { current: 1, next: 1}
+    }
 }
-
-

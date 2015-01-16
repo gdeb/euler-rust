@@ -1,11 +1,10 @@
+#[allow(dead_code)]
 
 
 // -------------------------------------------------------------------------------
 // Palindrome module
 // -------------------------------------------------------------------------------
 
-
-// pub mod palindrome {
 pub fn is_palindrome (mut n: u64) -> bool {
     let mut digits = vec![];
 
@@ -21,29 +20,4 @@ pub fn is_palindrome (mut n: u64) -> bool {
     }
     true
 }
-
-// }
-
-
-// struct NumberIterator {
-
-// }
-// struct Sieve {
-
-// }
-
-// impl Iterator for Sieve {
-//     type Item = u64;
-
-//     fn next(&mut self) -> Option<u64> {
-//         let p = self.sieve.next().expect("r");
-//         self.sieve =self.sieve.filter(|n| n % p === 0);
-//         Some(p)
-//     }
-// }
-
-
-
-
-
 
