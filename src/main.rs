@@ -71,34 +71,40 @@ fn ex6() -> u64 {
 fn ex7() -> u64 {
     primes::primes_iterator().nth(10001 - 1).expect("")
 }
+
 //-------------------------------------------------------------------------------
 #[allow(unstable)]
-// fn ex10() -> u64 {
-//     primes::eratosthene(2_000_000)
-//         .sum() 
-// }
+fn ex10() -> u64 {
+    primes::primes_iterator()
+        .take_while(|n| *n <2_000_000)
+        .sum() 
+}
+
+fn ex15() -> u64 {
+    utils::choose(40,20)
+}
 
 //-------------------------------------------------------------------------------
 fn main() {
     println!("Euler Project Solver!");
     
     let solvers = vec!(
-        ex1 as fn() -> u64, 
-        ex2 as fn() -> u64, 
-        ex3 as fn() -> u64, 
-        ex4 as fn() -> u64, 
-        ex5 as fn() -> u64, 
-        ex6 as fn() -> u64, 
-        ex7 as fn() -> u64, 
+        (1, ex1 as fn() -> u64), 
+        (2, ex2 as fn() -> u64),
+        (3, ex3 as fn() -> u64),
+        (4, ex4 as fn() -> u64),
+        (5, ex5 as fn() -> u64),
+        (6, ex6 as fn() -> u64),
+        (7, ex7 as fn() -> u64),
+        (10, ex10 as fn() -> u64),
+        (15, ex15 as fn() -> u64),
     );
 
 
-    for (i, solver) in solvers.iter().enumerate() {
-        println!("Exercise {}: {}", i+1, (solver)());
+    for &(i, solver) in solvers.iter() {
+        println!("Exercise {}: {}", i, (solver)());
     }
 
 }
-
-
 
 
