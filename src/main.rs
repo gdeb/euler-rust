@@ -45,7 +45,7 @@ fn ex4() -> u64 {
     let mut max = 0;
     for i in 100..1000 {
         for j in 100..1000 { 
-            if i*j > max && is_palindrome(i*j) {
+            if i*j > max && is_palindrome(i*j, 10) {
                 max = i*j;
             }
         }
@@ -84,6 +84,12 @@ fn ex15() -> u64 {
     utils::choose(40,20)
 }
 
+fn ex36() -> u64 {
+    (1..1_000_000)
+        .filter(|n| is_palindrome(*n, 10) && is_palindrome(*n, 2))
+        .sum()
+}
+
 //-------------------------------------------------------------------------------
 fn main() {
     println!("Euler Project Solver!");
@@ -98,6 +104,7 @@ fn main() {
         (7, ex7 as fn() -> u64),
         (10, ex10 as fn() -> u64),
         (15, ex15 as fn() -> u64),
+        (36, ex36 as fn() -> u64),
     );
 
 

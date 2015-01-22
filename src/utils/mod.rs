@@ -32,14 +32,3 @@ pub fn choose(n: u64, k: u64) -> u64 {
     factors.into_iter().product()
 }
 
-// fn find_divisor<'v>(d: u64, v: &'v Vec<u64>) -> (&'v u64, u64) {
-//     let mut elem;
-//     let mut c;
-//     for i in v.iter() {
-//         elem = i;
-//         c = gcd(*i, d);
-//         if c > 1 { break } 
-//     }
-//     (elem, c)
-// }
-

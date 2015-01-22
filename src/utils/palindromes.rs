@@ -5,13 +5,13 @@
 // Palindrome module
 // -------------------------------------------------------------------------------
 
-pub fn is_palindrome (mut n: u64) -> bool {
+pub fn is_palindrome (mut n: u64, base: u64) -> bool {
     let mut digits = vec![];
 
     loop {
-        digits.push(n % 10);
-        if n < 10 { break }
-        n = n / 10;
+        digits.push(n % base);
+        if n < base { break }
+        n = n / base;
     }
     let nbr_digits = digits.len();
 
